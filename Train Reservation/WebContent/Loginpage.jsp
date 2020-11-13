@@ -44,7 +44,7 @@ Login Form
   			<input type="submit" class ="loginbutton" name="button" value="Log in">
 		</form><br>
 New User Sign up here <br><br>
-		<form action="Verifylogin.jsp" method = "post">
+		<form action="Signup.jsp" method = "post">
   			<input type="submit" class ="loginbutton" name="button" value="Sign Up">
 		</form><br>
 	</div>
