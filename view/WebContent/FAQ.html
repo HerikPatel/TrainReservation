@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<style>
+
+#keywords{
+  
+  border-radius:24px;
+    font-size: 17px;
+}
+#faq{
+    font-size: 25px;
+    padding : 5px , 6px;
+}
+</style>
+<head>
+<meta charset="ISO-8859-1">
+<title>FAQ</title>
+</head>
+<h1 style ="text-align : center">FAQ</h1>
+<body>
+<div id="keywordsdiv">
+
+<input type="text" id="keywords"  placeholder="Search using Keywords" onkeyup="mySearch()" size =160>
+  <input style="border-radius:24px;background-color: #00ffff;" type="submit" value="Search">
+</div>
+<div id = "faq">
+<dl id="mylist">
+<dt style ="  padding-top: 10px; padding-bottom:10px" ><a>Can I cancel my reservation <br>Yes you can cancel your reservation</a></dt>
+<dt style ="  padding-top: 10px; padding-bottom:10px" ><a>How to book a reservation <br>Use or website to book a reservation</a></dt>
+
+</dl>
+
+</div>
+</body>
+<script>
+function mySearch() {
+    var keyword, filter, dl, dt, a, val
+    keyword = document.getElementById("keywords")
+    filter = keyword.value.toUpperCase()
+    dl = document.getElementById("mylist")
+    dt = dl.getElementsByTagName("dt")
+    for (var i = 0; i < dt.length; i++) {
+        a = dt[i].getElementsByTagName("a")[0]
+        val = a.textContent || a.innerText
+        if (val.toUpperCase().indexOf(filter) > -1) {
+            dt[i].style.display = ""
+        } else {
+            dt[i].style.display = "none"
+        }
+    }
+}
+</script>
+</html>
