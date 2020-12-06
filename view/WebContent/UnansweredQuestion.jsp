@@ -7,10 +7,17 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Unanswered Question </title>
+<h1 style="text-align:center;">Unanswered Questions</h1>
 </head>
 <body>
 <% 
  try{
+	  String ses2=(String)session.getAttribute("type");
+
+	 if(!ses2.equals("R"))
+		{
+	        response.sendRedirect("logout.jsp");
+		}
 		ApplicationDB db = new ApplicationDB();	
 		Connection con = db.getConnection();
 	    Statement st = con.createStatement();

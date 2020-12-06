@@ -21,6 +21,8 @@ try{
 	 ResultSet rs;
 	    rs = st.executeQuery("select * from customer where email='" + email + "' and password='" + password + "'");
 	    if (rs.next()) {
+	    	String type = rs.getString("accountype");
+	    	session.setAttribute("type", type);
 	        session.setAttribute("email", email); // the username will be stored in the session
 	        session.setAttribute("invalidPassword", "none");
 	        response.sendRedirect("TrainSchedule.jsp");

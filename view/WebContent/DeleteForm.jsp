@@ -7,6 +7,15 @@
 <title>Insert title here</title>
 </head>
 <body style= "">
+<%
+
+String ses2=(String)session.getAttribute("type");
+
+if(!ses2.equals("R"))
+	{
+       response.sendRedirect("logout.jsp");
+	}
+%>
 <div style= " text-align: center;">
   <form action="DeleteSchedule.jsp">
              <label >Train ID</label><br>

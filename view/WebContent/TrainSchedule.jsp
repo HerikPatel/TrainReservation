@@ -38,6 +38,12 @@ table ,td, th {
     </div>
   <%
   try{
+	  String ses2=(String)session.getAttribute("type");
+System.out.println(ses2);
+	if(!ses2.equals("R"))
+	{
+        response.sendRedirect("logout.jsp");
+	}
 		ApplicationDB db = new ApplicationDB();	
 		Connection con = db.getConnection();
 		Statement stmt = con.createStatement();

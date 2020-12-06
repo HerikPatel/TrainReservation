@@ -40,11 +40,15 @@ width: max-content;
 <div id ="chat"> 
 <% 
  try{
+	    String email =(String)session.getAttribute("email");
+if(email == null)
+{
+    response.sendRedirect("index.jsp");
+}
 		ApplicationDB db = new ApplicationDB();	
 		Connection con = db.getConnection();
 		Statement stmt = con.createStatement();
 	    Statement st = con.createStatement();
-	    String email ="admin1234";
 	    String question = request.getParameter("question"); 
 	    int id=0;
 

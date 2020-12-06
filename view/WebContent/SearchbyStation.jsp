@@ -36,6 +36,13 @@ String station = request.getParameter("station");
 
   <%
   try{
+	  String ses2=(String)session.getAttribute("type");
+
+	  if(!ses2.equals("R"))
+	  {
+	      response.sendRedirect("logout.jsp");
+	  }
+
 		ApplicationDB db = new ApplicationDB();	
 		Connection con = db.getConnection();
 		Statement stmt = con.createStatement();

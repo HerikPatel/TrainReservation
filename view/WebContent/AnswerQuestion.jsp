@@ -82,7 +82,7 @@ catch(Exception ex){
     </div>
 
  <div id="chatinput">
-  <input  style="border-radius:24px; font-size: 27px;" type="text" id="answer" name="answer" placeholder="Describe Answer in less than 600 characters "size=100>
+  <input  style="border-radius:24px; font-size: 27px;" type="text" id="answer" name="answer" placeholder="Describe Answer in less than 600 characters "size=99>
   <button style="border-radius:24px; font-size: 27px; background-color: #00ffff;" onclick="myFunction()">Send</button>
   </div>
 </body>

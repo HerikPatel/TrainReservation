@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
+<%@ page import="java.io.*,java.util.*,java.sql.*"%>
+<%@ page import="javax.servlet.http.*,javax.servlet.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +10,14 @@
 </head>
 <body style= "">
 <div style="  text-align: center;">
+<%
+String ses2=(String)session.getAttribute("type");
 
+if(!ses2.equals("R"))
+{
+    response.sendRedirect("logout.jsp");
+}
+%>
   <form action="UpdateSchedule.jsp">
              <label >Train ID</label><br>
  			 <input type="text" name="id"  required><br>
