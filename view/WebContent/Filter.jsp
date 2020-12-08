@@ -25,13 +25,24 @@ table ,td, th {
     <th>Last Name</th>
   </tr>
   <%
+  String ses2=(String)session.getAttribute("type");
+	 
+  if(ses2 != null)
+  {
+	if(!ses2.equals("R"))
+	{
+        response.sendRedirect("logout.jsp");
+  }
+  }
+  
+  else
+  {
+	  System.out.println("Redirecting to login page");
+        response.sendRedirect("index.jsp");
+  }
+	
   try{
-	  String ses2=(String)session.getAttribute("type");
-
-	  if(!ses2.equals("R"))
-	  {
-	      response.sendRedirect("logout.jsp");
-	  }
+	 
 
 		ApplicationDB db = new ApplicationDB();	
 		Connection con = db.getConnection();
@@ -58,7 +69,6 @@ table ,td, th {
 	}
 
 	catch(Exception ex){
-		response.sendRedirect("TrainSchedule.jsp");
 	}
   
   %>

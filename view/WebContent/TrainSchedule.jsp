@@ -36,14 +36,29 @@ table ,td, th {
   <input style="border-radius:24px;background-color: #00ffff;" type="submit" value="Search">
 </form> 
     </div>
+    
   <%
+
+  	
   try{
 	  String ses2=(String)session.getAttribute("type");
-System.out.println(ses2);
-	if(!ses2.equals("R"))
-	{
-        response.sendRedirect("logout.jsp");
-	}
+	  System.out.println(ses2);
+	 
+	    if(ses2 != null)
+	    {
+	  	if(!ses2.equals("R"))
+	 	{
+	          response.sendRedirect("logout.jsp");
+	    }
+	    }
+	    
+	    else
+	    {
+	  	  System.out.println("Redirecting to login page");
+	          response.sendRedirect("index.jsp");
+	    }
+	  	
+	  
 		ApplicationDB db = new ApplicationDB();	
 		Connection con = db.getConnection();
 		Statement stmt = con.createStatement();
@@ -89,8 +104,7 @@ System.out.println(ses2);
   <form action="FAQ.html">
   <input style="border-radius:24px;background-color: #00ffff;" type="submit" value="FAQ">
 </form>
- <form action="AskQuestion.jsp">
-  <input style="border-radius:24px;background-color: #00ffff;" type="submit" value="AskQuestion">
+
 </form> <form action="UnansweredQuestion.jsp">
   <input style="border-radius:24px;background-color: #00ffff;" type="submit" value="Unanswered Question">
 </form>

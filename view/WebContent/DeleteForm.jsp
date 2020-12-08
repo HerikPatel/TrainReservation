@@ -10,11 +10,22 @@
 <%
 
 String ses2=(String)session.getAttribute("type");
+System.out.println(ses2);
 
-if(!ses2.equals("R"))
+  if(ses2 != null)
+  {
+	if(!ses2.equals("R"))
 	{
-       response.sendRedirect("logout.jsp");
-	}
+        response.sendRedirect("logout.jsp");
+  }
+  }
+  
+  else
+  {
+	  System.out.println("Redirecting to login page");
+        response.sendRedirect("index.jsp");
+  }
+	
 %>
 <div style= " text-align: center;">
   <form action="DeleteSchedule.jsp">

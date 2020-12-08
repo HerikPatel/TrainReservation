@@ -13,10 +13,20 @@
 <%
 String ses2=(String)session.getAttribute("type");
 
-if(!ses2.equals("R"))
-{
-    response.sendRedirect("logout.jsp");
-}
+  if(ses2 != null)
+  {
+	if(!ses2.equals("R"))
+	{
+        response.sendRedirect("logout.jsp");
+  }
+  }
+  
+  else
+  {
+	  System.out.println("Redirecting to login page");
+        response.sendRedirect("index.jsp");
+  }
+	
 %>
   <form action="UpdateSchedule.jsp">
              <label >Train ID</label><br>
