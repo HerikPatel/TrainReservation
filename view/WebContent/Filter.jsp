@@ -19,6 +19,11 @@ table ,td, th {
 
 </head>
 <body>
+<a href="TrainSchedule.jsp">
+<img border="0" alt="go back" src="back.png" width="25" height="10">
+Go back
+</a>
+<br><br>
 <table style="width:100%">
   <tr>
     <th>First Name</th>

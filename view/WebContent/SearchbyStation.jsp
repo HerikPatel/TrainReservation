@@ -20,10 +20,16 @@ String station = request.getParameter("station");
 <title >Schedule </title>
 <h1 style ="  text-align: center;">Schedule For <%= station %> </h1>
 </head>
+<a href="TrainSchedule.jsp">
+<img border="0" alt="go back" src="back.png" width="25" height="10">
+Go back
+</a>
 <body>
 <table style="width:100%">
   <tr>
-    <th>Train ID</th>
+    <th>ID</th>
+         <th>Train ID</th>
+    
     <th>Transit Line Name</th>
     <th>Origin</th>
     <th>Destination</th>
@@ -59,7 +65,7 @@ String station = request.getParameter("station");
 	    Statement st = con.createStatement();
 
 		 ResultSet rs;
-		    rs = st.executeQuery("select * from TSchedule where Origin='"+station+"' OR Destination='"+station+"'");
+		    rs = st.executeQuery("select * from Schedule where origin='"+station+"' OR destination='"+station+"'");
 		   
 		    while (rs.next()) {
 		    	
@@ -71,15 +77,18 @@ String station = request.getParameter("station");
 		   %>
 		    	
 		    	<tr>
-		        <td> <%= rs.getString("id") %></td>
+<td> <%= rs.getString("id") %></td>
+		        		       <td><%= rs.getString("train_id") %></td>
+		        
 		        <td><%= rs.getString("transit_line_name") %></td>	
-		        <td><%= rs.getString("Origin") %></td>
-		        <td><%= rs.getString("Destination") %></td>	        
+		        <td><%= rs.getString("origin") %></td>
+		        <td><%= rs.getString("destination") %></td>	        
 		        <td><%= rs.getString("Departure") %></td>
 		         <td><%= dep %></td>
 		          <td><%= rs.getString("Arrival") %></td>
 		         <td><%= arr %></td>
 		         <td><%= rs.getString("fare") %></td>
+		        
 		        
 		      </tr>	
 		   <% }

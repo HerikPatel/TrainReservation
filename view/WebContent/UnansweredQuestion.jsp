@@ -10,6 +10,11 @@
 <h1 style="text-align:center;">Unanswered Questions</h1>
 </head>
 <body>
+<a href="TrainSchedule.jsp">
+<img border="0" alt="go back" src="back.png" width="25" height="10">
+Go back
+</a>
+<br><br>
 <% 
 
  try{

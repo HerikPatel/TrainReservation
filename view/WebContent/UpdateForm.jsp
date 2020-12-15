@@ -29,8 +29,11 @@ String ses2=(String)session.getAttribute("type");
 	
 %>
   <form action="UpdateSchedule.jsp">
-             <label >Train ID</label><br>
+             <label > ID</label><br>
  			 <input type="text" name="id"  required><br>
+ 			              <label >Train ID</label><br>
+ 			 <input type="text" name="train_id"  ><br>
+ 			 
   			<label >Transit Line Name</label><br>
   			<input type="text" name="transit_line_name" ><br>
   			<label >Origin</label><br>

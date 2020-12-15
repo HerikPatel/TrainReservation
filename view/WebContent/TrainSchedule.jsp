@@ -20,7 +20,9 @@ table ,td, th {
 <h2 style ="  text-align: center;">Train Schedule</h2>
 <table style="width:100%">
   <tr>
-    <th>Train ID</th>
+    <th>ID</th>
+         <th>Train ID</th>
+    
     <th>Transit Line Name</th>
     <th>Origin</th>
     <th>Destination</th>
@@ -29,6 +31,7 @@ table ,td, th {
     <th>Arrival</th>
     <th>Arrvial Time</th>
     <th>Fare</th>
+    
   </tr>
   <div style="padding-left: 25%;"> 
   <form action="SearchbyStation.jsp">
@@ -65,7 +68,7 @@ table ,td, th {
 	    Statement st = con.createStatement();
 
 		 ResultSet rs;
-		    rs = st.executeQuery("select * from TSchedule");
+		    rs = st.executeQuery("select * from Schedule ");
 		   
 		    while (rs.next()) {
 		    	
@@ -78,9 +81,11 @@ table ,td, th {
 		    	
 		    	<tr>
 		        <td> <%= rs.getString("id") %></td>
+		        		       <td><%= rs.getString("train_id") %></td>
+		        
 		        <td><%= rs.getString("transit_line_name") %></td>	
-		        <td><%= rs.getString("Origin") %></td>
-		        <td><%= rs.getString("Destination") %></td>	        
+		        <td><%= rs.getString("origin") %></td>
+		        <td><%= rs.getString("destination") %></td>	        
 		        <td><%= rs.getString("Departure") %></td>
 		         <td><%= dep %></td>
 		          <td><%= rs.getString("Arrival") %></td>

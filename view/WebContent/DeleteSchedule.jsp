@@ -18,7 +18,8 @@ try{
     Statement st = con.createStatement();
 	String id = request.getParameter("id"); 
 
-String str = "Delete from TSchedule WHERE id ="+id;
+String str = "Delete from Schedule  WHERE id ="+id;
+System.out.print(str);
 st.executeUpdate(str);
 response.sendRedirect("TrainSchedule.jsp");
 
