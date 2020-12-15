@@ -18,9 +18,18 @@ try{
     Statement st = con.createStatement();
 	String id = request.getParameter("id"); 
 
-String str = "Delete from Schedule  WHERE id ="+id;
-System.out.print(str);
+String str = "Delete from Route  WHERE schedule_id = "+id+";";
+//System.out.println(str);
 st.executeUpdate(str);
+
+str = "Delete from reservationdetails  WHERE schedule_id = "+id+";";
+st.executeUpdate(str);
+
+
+str = "Delete from Schedule  WHERE id = "+id+";";
+stmt.executeUpdate(str);
+
+
 response.sendRedirect("TrainSchedule.jsp");
 
 	 
@@ -28,6 +37,8 @@ response.sendRedirect("TrainSchedule.jsp");
 
 catch(Exception ex){
 	
+	response.sendRedirect("TrainSchedule.jsp");
+
 }
 
 %>
