@@ -25,7 +25,14 @@ try{
 	    	session.setAttribute("type", type);
 	        session.setAttribute("email", email); // the username will be stored in the session
 	        session.setAttribute("invalidPassword", "none");
-	        response.sendRedirect("TrainSchedule.jsp");
+	        if(type.equals("R")) {
+	        	response.sendRedirect("TrainSchedule.jsp");
+	        }else if(type.equals("A")) {
+	        	response.sendRedirect("AdminConsole.jsp");
+	        }else {
+	        	response.sendRedirect("logout.jsp");
+	        	System.out.println("Redirecting to login, there is no logic for customers yet.");
+	        }
 	    } else {
 	        session.setAttribute("invalidPassword", "block");
 	        response.sendRedirect("index.jsp");
