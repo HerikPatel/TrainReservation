@@ -57,8 +57,8 @@ Go back
 		date = date.substring(0,4)+date.substring(5,7)+date.substring(8,10);
 		String transit_line_name = request.getParameter("transit_line_name"); 
 		
-		String select = "select c.firstname , c.lastname from customer c , reservation r, reservationdetails rv, TSchedule t	where  c.email= r.email AND	r.reservation_number = rv.reservation_number AND rv.train_id=t.id AND t.transit_line_name='"+transit_line_name+"' AND t.Departure ="+date+" ;";
-
+		String select = "select c.firstname , c.lastname from customer c , reservation r, reservationdetails rv, Schedule t	where  c.email= r.email AND	r.reservation_number = rv.reservation_number AND rv.schedule_id=t.id AND t.transit_line_name='"+transit_line_name+"' AND t.Departure ="+date+" ;";
+System.out.print(select);
 		 ResultSet rs;
 		    rs = st.executeQuery(select);
 		   
