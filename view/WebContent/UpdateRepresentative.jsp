@@ -31,20 +31,19 @@ try{
 	Connection con = db.getConnection();
 	Statement stmt = con.createStatement();
 
-	String email = request.getParameter("email");
+	String ssn = request.getParameter("ssn");
 	String password = request.getParameter("password").equals("") ? "" : String.format("password = '%s',", request.getParameter("password"));
 	String username = request.getParameter("username").equals("") ? "" : String.format("username = '%s',", request.getParameter("username"));
-	String ssn = request.getParameter("ssn").equals("") ? "" : String.format("ssn = '%s',", request.getParameter("ssn"));
 	String firstname = request.getParameter("firstname").equals("") ? "" : String.format("firstname = '%s',", request.getParameter("firstname"));
 	String lastname = request.getParameter("lastname").equals("") ? "" : String.format("lastname = '%s',", request.getParameter("lastname"));
 	
-	String changeList = password + username + ssn + firstname + lastname;
+	String changeList = password + username + firstname + lastname;
 	changeList = changeList.equals("") ? "" : changeList.substring(0, changeList.length()-1);
 	
-	if(email != null) {
+	if(ssn != null) {
 		Statement st = con.createStatement();
-		String updateQry =String.format("update customer set %s where email = '%s'", 
-				changeList, email);
+		String updateQry =String.format("update employee set %s where ssn = '%s'", 
+				changeList, ssn);
 		System.out.println(updateQry);
 		st.executeUpdate(updateQry);
 		response.sendRedirect("ManageRepresentatives.jsp");

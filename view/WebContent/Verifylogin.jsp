@@ -16,30 +16,41 @@ try{
 
 	String email = request.getParameter("email");
 	String password = request.getParameter("password");
-    Statement st = con.createStatement();
-
-	 ResultSet rs;
-	    rs = st.executeQuery("select * from customer where email='" + email + "' and password='" + password + "'");
+	
+	if(email.equals("admin") && password.equals("admin123")){
+		session.setAttribute("type", "A");
+		session.setAttribute("username", "admin");
+		session.setAttribute("invalidPassword", "none");
+		response.sendRedirect("AdminConsole.jsp");
+	}else {
+		ResultSet rs;
+		Statement st = con.createStatement();
+		String type;
+		if(email.contains("@")){
+			rs = st.executeQuery("select * from customer where email='" + email + "' and password='" + password + "'");
+			type = "C";
+		}else {
+			rs = st.executeQuery("select * from employee where username='" + email + "' and password='" + password + "'");
+			type = "R";
+		}
 	    if (rs.next()) {
-	    	String type = rs.getString("accountype");
 	    	session.setAttribute("type", type);
-	        session.setAttribute("email", email); // the username will be stored in the session
 	        session.setAttribute("invalidPassword", "none");
 	        if(type.equals("R")) {
+	        	session.setAttribute("username", email);
 	        	response.sendRedirect("TrainSchedule.jsp");
-	        }else if(type.equals("A")) {
-	        	response.sendRedirect("AdminConsole.jsp");
 	        }else {
-	        	response.sendRedirect("logout.jsp");
-	        	System.out.println("Redirecting to login, there is no logic for customers yet.");
+	        	session.setAttribute("email", email);
+	        	response.sendRedirect("home.jsp");
+	        	System.out.println("Redirecting to home, there is no logic for customers yet.");
 	        }
 	    } else {
 	        session.setAttribute("invalidPassword", "block");
 	        response.sendRedirect("index.jsp");
 	    }
 	 
+	}
 }
-
 catch(Exception ex){
 	System.out.println("Login failed");
 }

@@ -42,22 +42,19 @@
     
 		    	<form action="CreateRep.jsp" method="POST">
 		    	<tr style="margin-bottom:50pt">
-		        <td><b>Email:</b></td> <td> <input type="text" id="email" name="email"></td>
+		        <td><b>Social Security Number:</b></td> <td> <input type="text" id="ssn" name="ssn"></td>
 		        </tr>
 		        <tr style="margin-bottom:50pt">
 		        <td><b>Username: </b></td> <td> <input type="text" id="username" name="username"></td>	
 		        </tr>
 		        <tr style="margin-bottom:50pt">
-		        <td><b>Password: </b></td> <td> <input type="text" id="password" name="password"></td>	
+		        <td><b>Password: </b></td> <td> <input type="password" id="password" name="password"></td>	
 		        </tr>
 		        <tr style="margin-bottom:50pt">
 		        <td><b>First Name:</b></td><td><input type="text" id="firstname" name="firstname"></td>
 		        </tr>
 		        <tr style="margin-bottom:50pt">
 		        <td><b>Last Name:</b></td><td><input type="text" id="lastname" name="lastname"></td>	        
-		        </tr>
-		        <tr style="margin-bottom:50pt">
-		        <td><b>Social Security Number:</b></td><td><input type="text" id="ssn" name="ssn"></td>
 		        </tr>
 		      	<tr style="margin-bottom:50pt">
 		      	<td></td><td><input style="border-radius:24px;background-color: #00ffff;" type="submit" value="Submit"></form></td>

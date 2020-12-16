@@ -45,20 +45,20 @@
 	    Statement st = con.createStatement();
 
 		 ResultSet rs;
-		    rs = st.executeQuery("select * from customer where username ='" + username + "'");
+		    rs = st.executeQuery("select * from employee where username ='" + username + "'");
 		   
 		    if (rs.next()) {
 
 		   %>
 		    	<form action="UpdateRepresentative.jsp" method="POST">
-		    	<tr style="margin-bottom:50pt">
-		        <td><b>Email:</b></td> <td> <%= rs.getString("email") %><input type="hidden" id="email" name="email" value="<%=rs.getString("email")%>"></td>
+		        <tr style="margin-bottom:50pt">
+		        <td><b>Social Security Number: </b></td> <td> <%= rs.getString("ssn") %><input type="hidden" id="ssn" name="ssn" value="<%=rs.getString("ssn")%>"></td>	
 		        </tr>
 		        <tr style="margin-bottom:50pt">
-		        <td><b>Username: </b></td> <td> <input type="text" placeholder="<%= rs.getString("username") %>" id="username" name="username"></td>	
+		        <td><b>Username:</b></td><td><input type="text" placeholder="<%= rs.getString("username") %>" id="username" name="username"></td>
 		        </tr>
 		        <tr style="margin-bottom:50pt">
-		        <td><b>Password: </b></td> <td> <input type="text" placeholder="<%= rs.getString("password") %>" id="password" name="password"></td>	
+		        <td><b>Password: </b></td> <td> <input type="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" id="password" name="password"></td>	
 		        </tr>
 		        <tr style="margin-bottom:50pt">
 		        <td><b>First Name:</b></td><td><input type="text" placeholder="<%= rs.getString("firstname") %>" id="firstname" name="firstname"></td>
@@ -66,12 +66,9 @@
 		        <tr style="margin-bottom:50pt">
 		        <td><b>Last Name:</b></td><td><input type="text" placeholder="<%= rs.getString("lastname") %>" id="lastname" name="lastname"></td>	        
 		        </tr>
-		        <tr style="margin-bottom:50pt">
-		        <td><b>Social Security Number:</b></td><td><input type="text" placeholder="NOT IN DATABASE YET" id="ssn" name="ssn"></td>
-		        </tr>
 		      	<tr style="margin-bottom:50pt">
 		      	<td></td><td><input style="border-radius:24px;background-color: #00ffff;" type="submit" value="Edit"></form><form action="DeleteRepresentative.jsp">
-					  <input type="hidden" id="email" name="email" value="<%=rs.getString("email")%>">
+					  <input type="hidden" id="ssn" name="ssn" value="<%=rs.getString("ssn")%>">
 					  <input style="border-radius:24px;background-color: #00ffff;" type="submit" value="Delete User">
 					</form> </td>
 		  		</tr>	

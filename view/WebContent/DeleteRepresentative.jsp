@@ -8,18 +8,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<script>
-
-function alertError() {
-	window.alert("An error occured!");
-}
-
-function updateWorked() {
-	alert("Changes have been recorded.");
-}
-
-</script>
-
 
 <% 
 try{
@@ -43,11 +31,11 @@ try{
 	Connection con = db.getConnection();
 	Statement stmt = con.createStatement();
 
-	String email = request.getParameter("email");
+	String ssn = request.getParameter("ssn");
 	
-	if(email != null) {
+	if(ssn != null) {
 		Statement st = con.createStatement();
-		String updateQry =String.format("delete from customer where email = '%s'", email);
+		String updateQry =String.format("delete from employee where ssn = '%s'", ssn);
 		System.out.println(updateQry);
 		st.executeUpdate(updateQry);
 		response.sendRedirect("ManageRepresentatives.jsp");

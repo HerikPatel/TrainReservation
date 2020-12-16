@@ -55,7 +55,7 @@
 Group 26 Project Deliverable #2
 	<div style="text-align: center;"><br>
 		<form action="Verifylogin.jsp" method = "post">
- 			 <label >Email</label><br>
+ 			 <label >Email (Customer)/Username (Representative)</label><br>
  			 <input type="text" name="email" ><br>
   			<label >Password</label><br>
   			<input type="password" name="password" ><br><br>
@@ -63,7 +63,7 @@ Group 26 Project Deliverable #2
 		</form><br>
 		<div style="color: red; display: <%=invalidPassword%>">INVALID LOGIN DETAILS, TRY AGAIN</div>
 		<br>
-New User Sign up here <br><br>
+New Customer, Sign up here <br><br>
 		<form action="Signup.jsp" method = "post">
   			<input type="submit" class ="loginbutton" name="button" value="Sign Up">
 		</form><br>

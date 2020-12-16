@@ -32,7 +32,6 @@ try{
 	Connection con = db.getConnection();
 	Statement stmt = con.createStatement();
 
-	String email = request.getParameter("email");
 	String password = request.getParameter("password");
 	String username = request.getParameter("username");
 	String ssn = request.getParameter("ssn");
@@ -40,10 +39,10 @@ try{
 	String lastname = request.getParameter("lastname");
 
 	
-	if(email != null) {
+	if(ssn != null) {
 		Statement st = con.createStatement();
-		String updateQry =String.format("insert into customer values('%s','%s','%s','%s','%s','R')", 
-				email, password, username, firstname, lastname);
+		String updateQry =String.format("insert into employee values('%s','%s','%s','%s','%s')", 
+				ssn, password, username, firstname, lastname);
 		System.out.println(updateQry);
 		st.executeUpdate(updateQry);
 		response.sendRedirect("ManageRepresentatives.jsp");

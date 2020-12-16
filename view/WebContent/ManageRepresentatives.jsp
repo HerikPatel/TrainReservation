@@ -13,7 +13,6 @@
 <h4 style ="  text-align: center;"><a href="CreateRepresentative.jsp">Create Representative</a></h4>
 <table style="width:100%">
   <tr>
-    <th>Email</th>
     <th>Username</th>
     <th>First Name</th>
     <th>Last Name</th>
@@ -49,18 +48,17 @@
 	    Statement st = con.createStatement();
 
 		 ResultSet rs;
-		    rs = st.executeQuery("select * from customer where accountype = 'R'");
+		    rs = st.executeQuery("select * from employee");
 		   
 		    while (rs.next()) {
 
 		   %>
 		    	
 		    	<tr style="text-align:center">
-		        <td> <%= rs.getString("email") %></td>
 		        <td><%= rs.getString("username") %></td>	
 		        <td><%= rs.getString("firstname") %></td>
 		        <td><%= rs.getString("lastname") %></td>	        
-		        <td>NOT IN TABLE</td>
+		        <td><%= rs.getString("ssn") %></td>
 		         <td>
 					<form action="EditRepresentative.jsp">
 					  <input type="hidden" id="username" name="username" value="<%=rs.getString("username")%>">
