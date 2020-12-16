@@ -71,8 +71,8 @@ div.centre {
 <div class="centre">
     <div class="btn-group">
       <a href="ManageRepresentatives.jsp" class="button">Manage Representatives</a>
-      <a class="button">Sales Reports</a>
-      <a class="button">Reservations</a>
+      <a href="SalesReport.jsp" class="button">Sales Reports</a>
+      <a href="ReservationsList.jsp" class="button">Reservations</a>
       <a class="button">Revenue</a>
       <a href="logout.jsp" class="button">Log Out</a>
     </div>
