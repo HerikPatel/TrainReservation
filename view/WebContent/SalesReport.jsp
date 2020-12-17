@@ -47,7 +47,6 @@
 	  		startDate = "2020-11-01";
 	  		endDate = "2020-12-01";
 	  	}
-	  	String monthYear = startDate.substring(5,7)+"/"+startDate.substring(0,4);
 	  	double totalRevenue = 0.0;
 	  	ApplicationDB db = new ApplicationDB();	
 		Connection con = db.getConnection();
@@ -60,7 +59,7 @@
 		 ResultSet rs;
 		    rs = st.executeQuery(query);
 		   %>
-		   <h4 style ="  text-align: center;">Sales Report for <%=monthYear%></h4>
+		   <h4 style ="  text-align: center;">Sales Report for <%=startDate%> - <%=endDate %></h4>
 		   <table style="width:100%">
 			  <tr>
 			    <th>Transit Line Name</th>
