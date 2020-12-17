@@ -120,7 +120,8 @@ response.sendRedirect("TrainSchedule.jsp");
 }
 
 catch(Exception ex){
-	
+	response.sendRedirect("TrainSchedule.jsp");
+
 }
 
 %>

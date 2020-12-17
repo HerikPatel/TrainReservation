@@ -6,6 +6,11 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
+<a href="TrainSchedule.jsp">
+<img border="0" alt="go back" src="back.png" width="25" height="10">
+Go back
+</a>
+<br><br>
 <body style= "">
 <%
 
