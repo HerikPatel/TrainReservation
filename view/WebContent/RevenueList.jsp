@@ -6,10 +6,10 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Admin Portal - Reservations List</title>
+<title>Admin Portal - Revenue</title>
 </head>
 <body>
-<h2 style ="  text-align: center;">List of Reservations (back to <a href="AdminConsole.jsp">Admin Portal</a>)</h2>    
+<h2 style ="  text-align: center;">List Revenue by Customer/Transit Line (back to <a href="AdminConsole.jsp">Admin Portal</a>)</h2>    
   <%
 
   	
@@ -39,27 +39,37 @@
 	  			break;
 	  		}
 	  	}
-	  	String query = "SELECT s.transit_line_name, rdrc.firstname, rdrc.lastname, rdrc.email, rdrc.reservation_number, rdrc.reservation_date, rdrc.fare FROM"+
-		  		" (SELECT rc.reservation_number, rc.reservation_date, rc.firstname, rc.lastname, rc.email, rd.schedule_id, rd.fare FROM (SELECT r.reservation_number, "+
-		  		"r.reservation_date, c.firstname, c.lastname, c.email FROM reservation r INNER JOIN customer c ON r.email = c.email) rc INNER JOIN reservationdetails rd ON "+
-		  		"rc.reservation_number = rd.reservation_number)rdrc INNER JOIN Schedule s ON rdrc.schedule_id = s.id";
+	  	String innerQuery = "SELECT s.transit_line_name, rrdc.reservation_number, rrdc.fare, rrdc.firstname, rrdc.lastname FROM (SELECT rrd.schedule_id, rrd.reservation_number,"+
+		  	" rrd.fare, c.firstname, c.lastname FROM (SELECT rd.schedule_id, rd.reservation_number, r.email, rd.fare FROM reservationdetails rd INNER JOIN reservation r ON rd.reservation_number = "+
+		  	"r.reservation_number) rrd INNER JOIN customer c ON rrd.email = c.email) rrdc INNER JOIN Schedule s ON rrdc.schedule_id = s.id";
+	  	String queryTwo;
+	  	String transitLine,fullName;
 	  	if(hasParams){
-	  		String transitLine, firstname, lastname;
+	  		String firstname, lastname;
 	  		transitLine = request.getParameter("transitLine");
 	  		firstname = request.getParameter("firstName");
 	  		lastname = request.getParameter("lastName");
-	  		if(!transitLine.equals("ALL")){
-	  			query+= " WHERE s.transit_line_name = '" + transitLine + "'";
+	  		if(!transitLine.equals("ALL")) {
+	  			innerQuery+= " WHERE s.transit_line_name = '" + transitLine + "'";
 	  		}
 	  		if(!firstname.equals("") && !lastname.equals("")){
-	  			query+= " AND rdrc.firstname = '" + firstname + "'";
-	  			query+= " AND rdrc.lastname = '" + lastname + "'";
+	  			innerQuery+= " AND rrdc.firstname = '" + firstname + "'";
+	  			innerQuery+= " AND rrdc.lastname = '" + lastname + "'";
+	  			fullName = firstname + " " + lastname;
+	  		}else{
+	  			fullName = "ALL";
 	  		}
-	  		query+=";";
+	  		queryTwo = innerQuery + ";";
+	  		
 	  	}else {
-	  		query+=";";
+	  		transitLine = "ALL";
+	  		fullName = "ALL";
+	  		queryTwo = innerQuery + ";";
 	  	}
-	  	System.out.println(query);
+	  	
+	  	String queryOne = String.format("SELECT SUM(x.fare) as 'SUM' FROM (%s) x;", innerQuery);
+	  	System.out.println(queryOne);
+	  	System.out.println(queryTwo);
 	  	ApplicationDB db = new ApplicationDB();	
 		Connection con = db.getConnection();
 		Statement stmt = con.createStatement();
@@ -69,20 +79,10 @@
 		rs = st.executeQuery("SELECT transit_line_name FROM Schedule");
 		    
 		   %>
-		   <table style="width:100%">
-			  <tr>
-			  	<th>Reservation #</th>
-			    <th>Reservation Date</th>
-			    <th>Transit Line Name</th>
-			    <th>Customer First Name</th>
-			    <th>Customer Last Name</th>
-			    <th>Customer Email</th>
-			    <th>Total Fare</th>
-			  </tr>
-			  <div style="padding-left: 25%;"> 
-				  <form action="ReservationsList.jsp">
+		   <div style="margin-left: 25%; margin-right: 25%;"> 
+				  <form action="RevenueList.jsp">
 				  <select name="transitLine" id="transitLine" style="margin-right:2%">
-				  <option value="ALL">All Stations</option>
+				  	<option value="ALL">All Stations</option>
 				  <%
 		    		while (rs.next()) {
 				  %>
@@ -95,25 +95,34 @@
 				  <input style="border-radius:24px;background-color: #00ffff;" type="submit" value="Search">
 				</form> 
 				</div>
+		   <table style="width:100%">
+		   	<tr style="text-align:center; margin-top: 50pt;">
+			    <td>Transit Line:</td>
+			    <td><%=transitLine%></td>
+			  </tr>
+			  <tr style="text-align:center; margin-top: 50pt;">
+			  	<td>Full Name:</td>
+			  	<td><%=fullName%></td>
+			  </tr>
+			  
 		   <%
 		   ResultSet rst;
-		    rst = st.executeQuery(query);
-		    while (rst.next()) {
+		    rst = st.executeQuery(queryOne);
+		    if (rst.next()) {
 		   %>
 		    	
 		    	<tr style="text-align:center">
-		        <td><%= rst.getString("reservation_number") %></td>	
-		        <td><%= rst.getString("reservation_date") %></td>	
-		        <td><%= rst.getString("transit_line_name") %></td>	
-		        <td><%= rst.getString("firstname") %></td>	
-		        <td><%= rst.getString("lastname") %></td>
-		        <td><%= rst.getString("email") %></td>	
-		        <td><%= rst.getDouble("fare") %></td> 
+		        <td>Total Revenue</td>	
+		        <td><%= rst.getDouble("SUM") %></td>	
+		        
 		      </tr>	
-		   
+		   	</table>
 		    <%
 		 
-		    }}
+		    }
+  
+  
+  }
 	catch(Exception ex){
 		
 	}

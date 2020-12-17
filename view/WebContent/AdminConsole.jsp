@@ -56,15 +56,11 @@ div.centre {
 	  	  System.out.println("Redirecting to login page");
 	          response.sendRedirect("index.jsp");
 	    }
-  }
-	catch(Exception ex) {
-		
-	}
+  
 	  
-		//ApplicationDB db = new ApplicationDB();	
-		//Connection con = db.getConnection();
-		//Statement stmt = con.createStatement();
-	    //Statement st = con.createStatement();
+		ApplicationDB db = new ApplicationDB();	
+		Connection con = db.getConnection();
+		Statement st = con.createStatement();
 %>
 
 <h1 style="text-align: center">Admin Portal</h1>
@@ -73,24 +69,47 @@ div.centre {
       <a href="ManageRepresentatives.jsp" class="button">Manage Representatives</a>
       <a href="SalesReport.jsp" class="button">Sales Reports</a>
       <a href="ReservationsList.jsp" class="button">Reservations</a>
-      <a class="button">Revenue</a>
+      <a href="RevenueList.jsp" class="button">Revenue</a>
       <a href="logout.jsp" class="button">Log Out</a>
     </div>
 </div>
+<%
+		String customerQuery = "SELECT c.firstname, c.lastname, x.email, x.amtTrips, x.amtSpent FROM (SELECT email, count(reservation_number) as 'amtTrips', sum(total_fare) as 'amtSpent' from reservation group by email) x "+
+				"INNER JOIN customer c ON x.email = c.email WHERE x.amtSpent = (SELECT MAX(z.amtSpent) FROM (SELECT SUM(total_fare) as 'amtSpent' from reservation group by email) z);";
+		ResultSet rs = st.executeQuery(customerQuery);
+		
 
+	if(rs.next()){
+%>
 <div class="centre" style="margin-top:40pt;">
-    <h2>Best Customer: insert Name here</h2>
-    <p>X Total Trips | $X Spent | X different lines traveled</p>
+    <h2>Best Customer: <%=rs.getString("firstname") %> <%=rs.getString("lastname") %> (<%=rs.getString("email") %>)</h2>
+    <p><%=rs.getInt("amtTrips") %> Total Trips | $<%=rs.getDouble("amtSpent") %> Spent</p>
 </div>
 
 <div class="centre" style="margin-top:40pt;">
     <h2>Five Most Active Train Lines</h2>
     <ol style="text-align: center; list-style-position: inside; padding: 0;">
-        <li> Station One</li>
-        <li> Station Two</li>
-        <li> Station Three</li>
-        <li> Station Four</li>
-        <li> Station Five</li>
+<%
+	}
+	String activeLineQuery = "SELECT x.amtTrips, s.transit_line_name FROM (SELECT COUNT(reservation_number) as 'amtTrips', "+
+	"schedule_id FROM reservationdetails GROUP by schedule_id ORDER BY amtTrips) x INNER JOIN Schedule s ON x.schedule_id = s.id;";
+	ResultSet rst = st.executeQuery(activeLineQuery);
+	int counter = 0;
+	while(rst.next() && counter < 5) {
+		
+	%>
+	<li> <%=rst.getString("transit_line_name") %> (<%=rst.getInt("amtTrips")%> Trips)</li>
+	
+	<%
+	counter++;
+	}
+  }
+catch(Exception ex) {
+	
+}
+%>
+
+        
     </ol>
 </div>
 
