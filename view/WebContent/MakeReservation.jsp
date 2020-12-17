@@ -9,7 +9,7 @@
 <title>Train Reservation System - Make Reservation</title>
 </head>
 <body>
-	<h2 style ="  text-align: center;">Make Reservation [back to <a href="SearchSchedules.jsp">Search</a>]</h2>
+	<h2 style ="  text-align: center;">Make Reservation [back to <a href="Customerhomepage.jsp">Home</a>]</h2>
   <%
 
   	
@@ -49,7 +49,7 @@
 		ResultSet rs = st.executeQuery(query);
 		if(!rs.next()) {
 			%>
-			<h2 style="text-align:center;"><font color="red">No Train Schedule Information found for this ID, <a href="SearchSchedules.jsp">Go Back.</a></font></h2>
+			<h2 style="text-align:center;"><font color="red">No Train Schedule Information found for this ID, <a href="Customerhomepage.jsp">Go Back to Home.</a></font></h2>
 			<%
 			
 		}else{
@@ -69,21 +69,24 @@
 				<tr style="margin-bottom:50pt">
 				<td><b>Ticket Type</b></td>
 				<td><b>Quantity</b></td>
-				<td><b>Price</b></td>
+				<td><b>One-Way Price/Round-Trip Price</b></td>
 				</tr>
 		    	<form action="CreateReservation.jsp" method="POST">
 		    	<input type="hidden" id="scheduleId" name="scheduleId" value="<%=scheduleId%>">
 		    	<tr style="margin-bottom:50pt">
-		        <td><b>Standard:</b></td> <td> <input type="text" id="standard" name="standard" size="2"></td> <td><b>$<%=fare %></b></td>
+		        <td><b>Standard:</b></td> <td> <input type="text" id="standard" name="standard" size="2"></td> <td><b>$<%=fare %>/$<%=fare*2 %></b></td>
 		        </tr>
 		        <tr style="margin-bottom:50pt">
-		        <td><b>Disabled:</b></td> <td> <input type="text" id="disabled" name="disabled" size="2"></td> <td><b>$<%=disabledFare %></b></td>
+		        <td><b>Disabled:</b></td> <td> <input type="text" id="disabled" name="disabled" size="2"></td> <td><b>$<%=disabledFare %>/$<%=disabledFare*2 %></</b></td>
 		        </tr>
 		        <tr style="margin-bottom:50pt">
-		        <td><b>Senior:</b></td> <td> <input type="text" id="senior" name="senior" size="2"></td> <td><b>$<%=seniorFare %></b></td>
+		        <td><b>Senior:</b></td> <td> <input type="text" id="senior" name="senior" size="2"></td> <td><b>$<%=seniorFare %>/$<%=seniorFare*2 %></</b></td>
 		        </tr>
 		        <tr style="margin-bottom:50pt">
-		        <td><b>Child:</b></td> <td> <input type="text" id="child" name="child" size="2"></td> <td><b>$<%=childFare %></b></td>
+		        <td><b>Child:</b></td> <td> <input type="text" id="child" name="child" size="2"></td> <td><b>$<%=childFare %>/$<%=childFare*2 %></</b></td>
+		        </tr>
+		        <tr style="margin-bottom:50pt">
+		        <td><b>Trip Type:</b></td><td><input type="radio" id="oneway" name="tripType" value="oneway"><label for="oneway">One-Way</label></td><td> <input type="radio" id="roundtrip" name="tripType" value="roundtrip"><label for="roundtrip">Round-Trip</label></td>
 		        </tr>
 		      	<tr style="margin-bottom:50pt">
 		      	<td></td><td><input style="border-radius:24px;background-color: #00ffff;" type="submit" value="Submit"></form></td>

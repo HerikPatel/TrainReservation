@@ -38,8 +38,9 @@ try{
 	String amtSenior = request.getParameter("senior").equals("") ? "0" : request.getParameter("senior");
 	String amtChild = request.getParameter("child").equals("") ? "0" : request.getParameter("child");
 	String scheduleId = request.getParameter("scheduleId");
+	double fareMultiplier = request.getParameter("tripType") == null || request.getParameter("tripType").equals("") || request.getParameter("tripType").equals("oneway") ? 1: 2;
 	if(scheduleId == null || scheduleId.equals("")){
-		out.println("Something went wrong, <a href='SearchReservations.jsp'> Go back to search. </a>");
+		out.println("Something went wrong, <a href='Customerhomepage.jsp'> Go back to home. </a>");
 	}else {
 		int totalTickets = Integer.parseInt(amtStandard) + Integer.parseInt(amtDisabled) + Integer.parseInt(amtSenior) + Integer.parseInt(amtChild);
 		String query = String.format("SELECT t.id, t.total_seats FROM Train t WHERE t.id = (SELECT s.train_id FROM Schedule s WHERE s.id = %s)", scheduleId);
@@ -73,7 +74,7 @@ try{
 		ResultSet rstTwo = st.executeQuery(queryThree);
 		Double fare = 0.0;
 		if(rstTwo.next()){
-			fare = rstTwo.getDouble("fare");
+			fare = rstTwo.getDouble("fare")* fareMultiplier;
 			System.out.println(fare);
 			java.util.Calendar now = java.util.Calendar.getInstance();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
