@@ -38,7 +38,7 @@ width: max-content;
 </head>
 <h1 style ="  text-align: center;">Chat with Representative</h1>
 <body>
-<a href="TrainSchedule.jsp">
+<a href="Customerhomepage.jsp">
 <img border="0" alt="go back" src="back.png" width="25" height="10">
 Go back
 </a>

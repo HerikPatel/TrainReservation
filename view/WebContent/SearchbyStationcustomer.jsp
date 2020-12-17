@@ -44,13 +44,22 @@ table ,td, th {
 		Connection con = db.getConnection();
 		Statement stmt = con.createStatement();
 	    Statement st = con.createStatement();
-	    int start =0 ,end =0;
+	    String typeofstation =  request.getParameter("typeofstation");
+		String date = request.getParameter("date");
+		date = date.substring(0,4)+date.substring(5,7)+date.substring(8,10);
+System.out.print(date);
+		String sqlquery = "";
+		if(typeofstation.equals("origin"))
+	     	sqlquery = "select * from Schedule where origin='"+station+"' AND Departure ='"+date+"'";
+		
+		else
+	     	sqlquery = "select * from Schedule where destination='"+station+"' AND Departure ='"+date+"'";
 
 		 ResultSet rs;
-		    rs = st.executeQuery("select * from Schedule where origin='"+station+"' OR destination='"+station+"'");
+		 
+		    rs = st.executeQuery(sqlquery);
 		   
 		    while (rs.next()) {
-		    	start = rs.getInt("train_id");
 		    	String dep = rs.getString("Departure_time");
 		    	dep=dep.substring(0,5);
 		    	String arr = rs.getString("Arrival_time");
