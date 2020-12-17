@@ -13,7 +13,6 @@ try{
 	ApplicationDB db = new ApplicationDB();	
 	Connection con = db.getConnection();
 	Statement stmt = con.createStatement();
-
 	String email = request.getParameter("email");
 	String password = request.getParameter("password");
 	
@@ -29,6 +28,7 @@ try{
 		if(email.contains("@")){
 			rs = st.executeQuery("select * from customer where email='" + email + "' and password='" + password + "'");
 			type = "C";
+			
 		}else {
 			rs = st.executeQuery("select * from employee where username='" + email + "' and password='" + password + "'");
 			type = "R";
@@ -40,9 +40,13 @@ try{
 	        	session.setAttribute("username", email);
 	        	response.sendRedirect("TrainSchedule.jsp");
 	        }else {
+	        	    	String name = rs.getString("firstname");
+
+	            	session.setAttribute("name", name);
+
 	        	session.setAttribute("email", email);
-	        	response.sendRedirect("home.jsp");
-	        	System.out.println("Redirecting to home, there is no logic for customers yet.");
+	        	response.sendRedirect("Customerhomepage.jsp");
+	        	//System.out.println("Redirecting to home, there is no logic for customers yet.");
 	        }
 	    } else {
 	        session.setAttribute("invalidPassword", "block");
@@ -54,9 +58,6 @@ try{
 catch(Exception ex){
 	System.out.println("Login failed");
 }
-
-
-
 %>
 </body>
 </html>
