@@ -82,7 +82,7 @@
 		   <div style="margin-left: 25%; margin-right: 25%;"> 
 				  <form action="RevenueList.jsp">
 				  <select name="transitLine" id="transitLine" style="margin-right:2%">
-				  	<option value="ALL">All Stations</option>
+				  	<option value="ALL">All Transit Lines</option>
 				  <%
 		    		while (rs.next()) {
 				  %>

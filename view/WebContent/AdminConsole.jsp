@@ -92,7 +92,7 @@ div.centre {
 <%
 	}
 	String activeLineQuery = "SELECT x.amtTrips, s.transit_line_name FROM (SELECT COUNT(reservation_number) as 'amtTrips', "+
-	"schedule_id FROM reservationdetails GROUP by schedule_id ORDER BY amtTrips) x INNER JOIN Schedule s ON x.schedule_id = s.id;";
+	"schedule_id FROM reservationdetails GROUP by schedule_id) x INNER JOIN Schedule s ON x.schedule_id = s.id ORDER BY x.amtTrips DESC;";
 	ResultSet rst = st.executeQuery(activeLineQuery);
 	int counter = 0;
 	while(rst.next() && counter < 5) {

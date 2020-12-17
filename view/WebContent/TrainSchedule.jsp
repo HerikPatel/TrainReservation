@@ -106,9 +106,6 @@ table ,td, th {
 <div style ="  text-align: center;   font-size: 20px;">
 <a href="UpdateForm.jsp">Edit</a>
 <a href="DeleteForm.jsp">Delete</a><br><br>
-  <form action="FAQ.html">
-  <input style="border-radius:24px;background-color: #00ffff;" type="submit" value="FAQ">
-</form>
 
 </form> <form action="UnansweredQuestion.jsp">
   <input style="border-radius:24px;background-color: #00ffff;" type="submit" value="Unanswered Question">
