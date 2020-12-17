@@ -15,34 +15,35 @@ table ,td, th {
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
-<h1 style = "text-align : center">Route for <%= request.getParameter("trainsitline")%></h1>
-<body>
-<% String train_id =  request.getParameter("train_id");
+<% String id =  request.getParameter("train_id");
+		 String fare =  request.getParameter("fare");
 	
 //System.out.println(station);
 %>
+<h1 style = "text-align : center">Route for <%= request.getParameter("trainsitline")%></h1>
+<h2 style = "text-align : center"> <a href="MakeReservation.jsp?scheduleid=<%= id %>"> Book </a></h2>
+<body>
+<a href="Customerhomepage.jsp">
+<img border="0" alt="go back" src="back.png" width="25" height="10">
+Go back
+</a>
+<br><br>
+
 <table style="width:100%">
   <tr>
-    <th>ID</th>
-         <th>Train ID</th>
-    
-    <th>Transit Line Name</th>
+
     <th>Origin</th>
     <th>Destination</th>
-    <th>Departure</th>
-    <th>Departure Time</th>
-    <th>Arrival</th>
-    <th>Arrvial Time</th>
-    <th>Fare</th>
-     <th> </th>
+     
     
   </tr>
 
     
   <%
 
-  	
+  
   try{
+	 
 	  
 		ApplicationDB db = new ApplicationDB();	
 		Connection con = db.getConnection();
@@ -51,30 +52,17 @@ table ,td, th {
 	    int start =0 ,end =0;
 
 		 ResultSet rs;
-		    rs = st.executeQuery("select * from Schedule where train_id = "+  train_id + "");
+		    rs = st.executeQuery("select * from Route where schedule_id = "+ id + "");
+		    System.out.print("select * from Route where schedule_id = "+ id + "");
 		   
 		    while (rs.next()) {
-		    	start = rs.getInt("train_id");
-		    	String dep = rs.getString("Departure_time");
-		    	dep=dep.substring(0,5);
-		    	String arr = rs.getString("Arrival_time");
-		    	arr=arr.substring(0,5);
 
 		   %>
 		    	
 		    	<tr>
-		        <td> <%= rs.getString("id") %></td>
-		        		       <td><%= rs.getString("train_id") %></td>
-		        
-		        <td><%= rs.getString("transit_line_name") %></td>	
-		        <td><%= rs.getString("origin") %></td>
-		        <td><%= rs.getString("destination") %></td>	        
-		        <td><%= rs.getString("Departure") %></td>
-		         <td><%= dep %></td>
-		          <td><%= rs.getString("Arrival") %></td>
-		         <td><%= arr %></td>
-		         <td><%= rs.getString("fare") %></td>
-		        <td> <a href="MakeReservation.jsp?scheduleid=<%= rs.getString("id") %>"> Book </a> </td>
+		        <td> <%= rs.getString("arrival_station") %></td>
+		        		       <td><%= rs.getString("departure_station") %></td>
+		       
 		      </tr>	
 		   <% }
 		 
@@ -86,6 +74,17 @@ table ,td, th {
 	}
   
   %>
+</table>
+<table style="width:100%">
+    <th> </th>
+    <th> </th>
+    <tr>
+		        <td>Total fare = <%= fare %></td>
+
+		       
+		        <td>  </td>
+		      </tr>	
+    
 </table>
 </body>
 </html>

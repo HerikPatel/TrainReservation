@@ -14,9 +14,20 @@ table ,td, th {
 <meta charset="ISO-8859-1">
 <title>Schedule</title>
 </head>
-<% String station =  request.getParameter("station");  %>
+<% String station =  request.getParameter("station"); 
+String typeofstation =  request.getParameter("typeofstation");
+	String date = request.getParameter("date");
+%>
 <h1 style = "text-align : center">Schedule for <%= station %></h1>
 <body>
+<a href="Customerhomepage.jsp">
+<img border="0" alt="go back" src="back.png" width="25" height="10">
+Go back
+</a>
+<br><br>
+  <div style="text-align : center"> 
+  
+</div>
 <table style="width:100%">
   <tr>
     <th>ID</th>
@@ -37,6 +48,7 @@ table ,td, th {
     
   <%
 
+	date = date.substring(0,4)+date.substring(5,7)+date.substring(8,10);
   	
   try{
 	  
@@ -44,9 +56,7 @@ table ,td, th {
 		Connection con = db.getConnection();
 		Statement stmt = con.createStatement();
 	    Statement st = con.createStatement();
-	    String typeofstation =  request.getParameter("typeofstation");
-		String date = request.getParameter("date");
-		date = date.substring(0,4)+date.substring(5,7)+date.substring(8,10);
+	    
 System.out.print(date);
 		String sqlquery = "";
 		if(typeofstation.equals("origin"))
@@ -79,7 +89,7 @@ System.out.print(date);
 		          <td><%= rs.getString("Arrival") %></td>
 		         <td><%= arr %></td>
 		         <td><%= rs.getString("fare") %></td>
-		        <td> <a href="RouteDetails.jsp?train_id=<%= rs.getString("train_id") %>&trainsitline=<%= rs.getString("transit_line_name") %>"> View Route </a> </td>
+		        <td> <a href="RouteDetails.jsp?train_id=<%= rs.getString("id") %>&trainsitline=<%= rs.getString("transit_line_name") %>&fare=<%= rs.getString("fare") %>"> View Route </a> </td>
 		      </tr>	
 		   <% }
 		 
@@ -87,10 +97,13 @@ System.out.print(date);
 
 	catch(Exception ex){
         response.sendRedirect("Customerhomepage.jsp");
-
+        
 	}
   
   %>
 </table>
 </body>
+<script>
+
+</script>
 </html>
