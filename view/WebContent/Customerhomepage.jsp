@@ -11,14 +11,26 @@
 </head>
 
 <body>
-<div style = "display:inline;">
 
-
+<table style="margin-left: auto; margin-right:auto;">
+<tr>
+<td>
 <button onclick="chat()" style="border-radius:24px;background-color: #00ffff;">Chat with a representative</button>
+</td>
+<td>
+<button onclick="manageRes()" style="border-radius:24px;background-color: #00ffff;float: right;">Manage Reservations</button>
+</td>
+<td>
 <button onclick="faq()" style="border-radius:24px;background-color: #00ffff;float: right;">FAQ</button>
+</td>
+<td>
+<form action="logout.jsp">
+  <input style="border-radius:24px;background-color: #00ffff;" type="submit" value="logout">
+</form>
+</td>
+</tr>
+</table>
 
- 
-</div>
 <br><br>
   <div style="padding-left: 25%;"> 
   <form action="SearchbyStationcustomer.jsp">
@@ -33,11 +45,6 @@
 </form> 
 <br><br><br>
     </div>
-    <div style ="  text-align: center;   font-size: 20px;">
-   <form action="logout.jsp">
-  <input style="border-radius:24px;background-color: #00ffff;" type="submit" value="logout">
-</form>
-</div>
 </body>
 <script >
 function chat() {
@@ -46,6 +53,9 @@ function chat() {
 function faq() {
 	  location.replace("FAQ.html")
 	}
+function manageRes() {
+	location.replace("ManageReservations.jsp")
+}
 </script>
 
 </html>
