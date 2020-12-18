@@ -16,10 +16,26 @@ table ,td, th {
 </head>
 <% String station =  request.getParameter("station"); 
 String typeofstation =  request.getParameter("typeofstation");
-	String date = request.getParameter("date");
+String date = request.getParameter("date");
+String order = request.getParameter("order") == null || request.getParameter("order").equals("") ? "ALL" : request.getParameter("order");
 %>
-<h1 style = "text-align : center">Schedule for <%= station %></h1>
+
 <body>
+<h1 style = "text-align : center">Schedule for <%= station %></h1>
+<div style="margin-left:48%; margin-right:auto">
+<form action="SearchbyStationcustomer.jsp" method="GET">
+	<select name="order" id="order">
+					<option value="ALL">Sort By</option>
+				  	<option value="Arrival">Arrival Time</option>
+				  	<option value="Departure">Departure Time</option>
+				  	<option value="fare">Fare</option>
+	</select>
+	<input type="hidden" id="station" name="station" value="<%=station%>">
+	<input type="hidden" id="typeofstation" name="typeofstation" value="<%=typeofstation%>">
+	<input type="hidden" id="date" name="date" value="<%=date%>">
+	<input style="border-radius:24px;background-color: #00ffff;" type="submit" value="Search">
+</form>
+</div>
 <a href="Customerhomepage.jsp">
 <img border="0" alt="go back" src="back.png" width="25" height="10">
 Go back
@@ -39,7 +55,7 @@ Go back
     <th>Departure</th>
     <th>Departure Time</th>
     <th>Arrival</th>
-    <th>Arrvial Time</th>
+    <th>Arrival Time</th>
     <th>Fare</th>
      <th>View Route</th>
     
@@ -57,16 +73,24 @@ Go back
 		Statement stmt = con.createStatement();
 	    Statement st = con.createStatement();
 	    
-System.out.print(date);
 		String sqlquery = "";
 		if(typeofstation.equals("origin"))
 	     	sqlquery = "select * from Schedule where origin='"+station+"' AND Departure ='"+date+"'";
 		
 		else
 	     	sqlquery = "select * from Schedule where destination='"+station+"' AND Departure ='"+date+"'";
-
+		
+		if(order.equals("Arrival")){
+			sqlquery+=" ORDER BY Arrival, Arrival_time;";
+		}else if(order.equals("Departure")){
+			sqlquery+=" ORDER BY Departure, Departure_time;";
+		}else if(order.equals("fare")){
+			sqlquery+=" ORDER BY fare;";
+		}else{
+			sqlquery+=";";
+		}
 		 ResultSet rs;
-		 
+		 System.out.println(sqlquery);
 		    rs = st.executeQuery(sqlquery);
 		   
 		    while (rs.next()) {
