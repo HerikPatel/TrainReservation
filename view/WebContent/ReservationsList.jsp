@@ -108,7 +108,7 @@
 		        <td><%= rst.getString("firstname") %></td>	
 		        <td><%= rst.getString("lastname") %></td>
 		        <td><%= rst.getString("email") %></td>	
-		        <td><%= rst.getDouble("fare") %></td> 
+		        <td>$<%= String.format("%.2f", rst.getDouble("fare")) %></td> 
 		      </tr>	
 		   
 		    <%

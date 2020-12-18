@@ -79,12 +79,12 @@
 		    	
 		    	<tr style="text-align:center">
 		        <td><%= rs.getString("transit_line_name") %></td>	
-		        <td><%= rs.getDouble("Total") %></td> 
+		        <td><%=String.format("%.2f", rs.getDouble("Total")) %></td> 
 		      </tr>	
 		   <% } %> 
 		   <tr style="text-align:center; margin-top: 50pt;">
 		        <td>Total</td>	
-		        <td><%=totalRevenue %></td> 
+		        <td><%=String.format("%.2f",totalRevenue) %></td> 
 		      </tr>	
 		    <%
 		 

@@ -74,16 +74,16 @@
 		    	<form action="CreateReservation.jsp" method="POST">
 		    	<input type="hidden" id="scheduleId" name="scheduleId" value="<%=scheduleId%>">
 		    	<tr style="margin-bottom:50pt">
-		        <td><b>Standard:</b></td> <td> <input type="text" id="standard" name="standard" size="2"></td> <td><b>$<%=fare %>/$<%=fare*2 %></b></td>
+		        <td><b>Standard:</b></td> <td> <input type="text" id="standard" name="standard" size="2"></td> <td><b>$<%=String.format("%.2f", fare) %>/$<%=String.format("%.2f", fare*2) %></b></td>
 		        </tr>
 		        <tr style="margin-bottom:50pt">
-		        <td><b>Disabled:</b></td> <td> <input type="text" id="disabled" name="disabled" size="2"></td> <td><b>$<%=disabledFare %>/$<%=disabledFare*2 %></</b></td>
+		        <td><b>Disabled:</b></td> <td> <input type="text" id="disabled" name="disabled" size="2"></td> <td><b>$<%=String.format("%.2f", disabledFare) %>/$<%=String.format("%.2f", disabledFare*2)%></</b></td>
 		        </tr>
 		        <tr style="margin-bottom:50pt">
-		        <td><b>Senior:</b></td> <td> <input type="text" id="senior" name="senior" size="2"></td> <td><b>$<%=seniorFare %>/$<%=seniorFare*2 %></</b></td>
+		        <td><b>Senior:</b></td> <td> <input type="text" id="senior" name="senior" size="2"></td> <td><b>$<%=String.format("%.2f", seniorFare) %>/$<%=String.format("%.2f", seniorFare*2) %></</b></td>
 		        </tr>
 		        <tr style="margin-bottom:50pt">
-		        <td><b>Child:</b></td> <td> <input type="text" id="child" name="child" size="2"></td> <td><b>$<%=childFare %>/$<%=childFare*2 %></</b></td>
+		        <td><b>Child:</b></td> <td> <input type="text" id="child" name="child" size="2"></td> <td><b>$<%=String.format("%.2f", childFare) %>/$<%=String.format("%.2f", childFare*2) %></</b></td>
 		        </tr>
 		        <tr style="margin-bottom:50pt">
 		        <td><b>Trip Type:</b></td><td><input type="radio" id="oneway" name="tripType" value="oneway"><label for="oneway">One-Way</label></td><td> <input type="radio" id="roundtrip" name="tripType" value="roundtrip"><label for="roundtrip">Round-Trip</label></td>

@@ -113,7 +113,7 @@
 		    	
 		    	<tr style="text-align:center">
 		        <td>Total Revenue</td>	
-		        <td><%= rst.getDouble("SUM") %></td>	
+		        <td><%=String.format("%.2f", rst.getDouble("SUM")) %></td>	
 		        
 		      </tr>	
 		   	</table>

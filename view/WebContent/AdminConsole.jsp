@@ -83,7 +83,7 @@ div.centre {
 %>
 <div class="centre" style="margin-top:40pt;">
     <h2>Best Customer: <%=rs.getString("firstname") %> <%=rs.getString("lastname") %> (<%=rs.getString("email") %>)</h2>
-    <p><%=rs.getInt("amtTrips") %> Total Trips | $<%=rs.getDouble("amtSpent") %> Spent</p>
+    <p><%=rs.getInt("amtTrips") %> Total Trips | $<%=String.format("%.2f", rs.getDouble("amtSpent"))%> Spent</p>
 </div>
 
 <div class="centre" style="margin-top:40pt;">
